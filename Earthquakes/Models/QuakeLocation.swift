@@ -16,15 +16,25 @@ struct QuakeLocation: Decodable {
     struct RootProperties: Decodable {
         var products: Products
     }
+    
     struct Products: Decodable {
         var origin: [Origin]
     }
+    
     struct Origin: Decodable {
         var properties: OriginProperties
     }
+    
     struct OriginProperties {
         var latitude: Double
         var longitude: Double
+    }
+    
+    init(latitude: Double, longitude: Double) {
+        self.properties =
+            RootProperties(products: Products(origin: [
+                Origin(properties: OriginProperties(latitude: latitude, longitude: longitude))
+            ]))
     }
 }
 
